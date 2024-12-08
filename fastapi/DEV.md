@@ -48,3 +48,24 @@ docker-compose down -v
 docker-compose up -d --build
 docker-compose exec fastapi alembic upgrade head
 docker-compose logs fastapi
+# Microsoft
+curl -d '{"ticker":"MSFT", "forecast":"UP"}' -H "Content-Type: application/json" -X POST http://localhost:8004/predict/stocks
+
+# News Corp
+curl -d '{"ticker":"NWS", "forecast":"UP"}' -H "Content-Type: application/json" -X POST http://localhost:8004/predict/stocks
+
+# Oracle
+curl -d '{"ticker":"ORCL", "forecast":"UP"}' -H "Content-Type: application/json" -X POST http://localhost:8004/predict/stocks
+
+# Tesla
+curl -d '{"ticker":"TLSA", "forecast":"UP"}' -H "Content-Type: application/json" -X POST http://localhost:8004/predict/stocks
+
+# Palantir
+curl -d '{"ticker":"PLTR", "forecast":"UP"}' -H "Content-Type: application/json" -X POST http://localhost:8004/predict/stocks
+
+
+curl http://localhost:8004/predict/stocks
+
+
+
+https://github.com/rafapi/fastapi-prophet
