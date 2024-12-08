@@ -35,4 +35,16 @@ curl -d '{"ticker":"TLSA", "forecast":"UP"}' -H "Content-Type: application/json"
 curl -d '{"ticker":"PLTR", "forecast":"UP"}' -H "Content-Type: application/json" -X POST http://localhost:8004/predict/stocks
 
 
-curl -d http://localhost:8004/predict/stocks
+curl http://localhost:8004/predict/stocks
+
+
+
+ML Prediction
+
+https://pystan.readthedocs.io/en/latest/installation.html
+
+
+docker-compose down -v
+docker-compose up -d --build
+docker-compose exec fastapi alembic upgrade head
+docker-compose logs fastapi
