@@ -1,0 +1,35 @@
+networks:
+  internet: {}
+  data: {}
+
+services:
+
+  postgres:
+    image: postgres:17.2-bookworm
+    ports:
+      - "5432:5432"
+    networks:
+      - data
+      - internet
+    # volumes:
+    #   - ./postgres-data:/var/lib/postgresql/data
+    restart: always
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=stack
+
+  fastapi:
+    build: ./fastapi
+    command: uvicorn app.main:app --reload --workers 1 --host 0.0.0.0 --port 8000
+    volumes:
+      - ./fastapi:/usr/src/app
+    ports:
+      - 8004:8000
+    environment:
+      - DATABASE_URL=postgresql+asyncpg://postgres:postgres@postgres:5432/stack
+    depends_on:
+      - postgres
+    networks:
+      - data
+      - internet
