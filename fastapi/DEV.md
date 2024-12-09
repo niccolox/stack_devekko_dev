@@ -48,6 +48,27 @@ docker-compose down -v
 docker-compose up -d --build
 docker-compose exec fastapi alembic upgrade head
 docker-compose logs fastapi
+
+docker-compose up -d --build
+docker-compose logs fastapi
+curl http://localhost:8004/predict/stocks
+curl http://localhost:8004/ping
+
+
+curl \
+  --header "Content-Type: application/json" \
+  --request POST \
+  --data '{"ticker":"MSFT"}' \
+  http://localhost:8008/predict
+
+docker-compose exec fastapi python
+
+from model import train, predict, convert
+train()
+train("GOOG")
+train("AAPL")
+train("^GSPC")
+
 # Microsoft
 curl -d '{"ticker":"MSFT", "forecast":"UP"}' -H "Content-Type: application/json" -X POST http://localhost:8004/predict/stocks
 
@@ -66,6 +87,13 @@ curl -d '{"ticker":"PLTR", "forecast":"UP"}' -H "Content-Type: application/json"
 
 curl http://localhost:8004/predict/stocks
 
+curl http://localhost:8004/ping
+
+
+
+
+Inspiration
+https://testdriven.io/blog/fastapi-crud/
 
 
 https://github.com/rafapi/fastapi-prophet

@@ -2,6 +2,9 @@ networks:
   internet: {}
   data: {}
 
+volumes:
+  postgres_data:
+
 services:
 
   postgres:
@@ -11,8 +14,8 @@ services:
     networks:
       - data
       - internet
-    # volumes:
-    #   - ./postgres-data:/var/lib/postgresql/data
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
     restart: always
     environment:
       - POSTGRES_USER=postgres
