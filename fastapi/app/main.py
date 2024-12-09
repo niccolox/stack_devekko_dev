@@ -2,12 +2,28 @@ from fastapi import Depends, FastAPI, HTTPException
 from sqlmodel import select
 from sqlmodel.ext.asyncio.session import AsyncSession
 from pydantic import BaseModel
+from fastapi.middleware.cors import CORSMiddleware
 
 from app.db import get_session, init_db
 from app.models import StockPrediction, StockPredictionCreate
 from app.model import convert, predict
 
 app = FastAPI()
+
+origins = [
+    "http://localhost.tiangolo.com",
+    "https://localhost.tiangolo.com",
+    "http://localhost",
+    "http://localhost:8081",
+]
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins,
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 class StockIn(BaseModel):
     ticker: str
