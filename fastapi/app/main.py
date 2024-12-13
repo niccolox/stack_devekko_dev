@@ -14,6 +14,9 @@ origins = [
     "http://localhost.tiangolo.com",
     "https://localhost.tiangolo.com",
     "http://localhost",
+    "exp://10.0.0.100:8081",
+    "exp://10.0.0.100",
+    "exp://*",
     "http://localhost:8081",
 ]
 

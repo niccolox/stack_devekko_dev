@@ -7,7 +7,7 @@ import { Text, View } from '@/components/Themed';
 import axios from 'axios';
 // const axios = require('axios');
 const testing = ('test');
-const pong = axios.get('http://localhost:8004/ping')
+const pong = axios.get('http://10.0.0.100:8004/ping/')
   .then(function (response) {
   // handle success
   console.log(response.status);
@@ -30,7 +30,7 @@ export default function TabTwoScreen() {
   const [post, setPost] = React.useState(null);
 
   React.useEffect(() => {
-    axios.get('http://localhost:8004/ping').then((response) => {
+    axios.get('http://10.0.0.100:8004/ping/').then((response) => {
       setPost(response.data);
       console.log(response.data);
       console.log("post", post);
